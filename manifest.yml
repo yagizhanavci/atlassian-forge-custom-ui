@@ -1,0 +1,38 @@
+modules:
+  jira:issuePanel:
+    - key: todo-panel
+      resource: main
+      resolver:
+        function: resolver
+      title: Changelog
+      viewportSize: medium
+      tooltip: Add a todo list
+      icon: https://developer.atlassian.com/platform/forge/images/issue-panel-icon.svg
+  jira:issueAction:
+    - key: export-csv
+      title: Export CSV
+      resource: export
+      resolver:
+        function: resolver
+  function:
+    - key: resolver
+      handler: index.handler
+resources:
+  - key: main
+    path: static/spa/build
+    tunnel:
+      port: 3000
+  - key: export
+    path: static/export/build
+    tunnel:
+      port: 3001
+permissions:
+  scopes:
+    - storage:app
+  external:
+    images:
+      - '*.gravatar.com'
+      - '*.wp.com'
+app:
+  id: ari:cloud:ecosystem::app/47694c12-6a84-4979-ae6c-96bee9ff3e08
+  name: todo-app
